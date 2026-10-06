@@ -1,6 +1,13 @@
+```mermaid
 sequenceDiagram
     participant browser
     participant server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    Note right of browser: The note text is sent in the request body
+    activate server
+    server-->>browser: 302 Redirect  to exampleapp/note
+    deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
@@ -21,7 +28,9 @@ sequenceDiagram
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
-    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    server-->>browser: [{ "content": "New note", "date": "2026-10-6" }, ... ]
     deactivate server
 
     Note right of browser: The browser executes the callback function that renders the notes
+    
+    ```
