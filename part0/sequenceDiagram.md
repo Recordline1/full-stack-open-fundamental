@@ -31,6 +31,5 @@ sequenceDiagram
     server-->>browser: [{ "content": "New note", "date": "2026-10-6" }, ... ]
     deactivate server
 
-    Note right of browser: The browser executes the callback function that renders the notes
-    
-    ```
+    Note right of browser: The browser executes the callback function that renders the notes    
+```
