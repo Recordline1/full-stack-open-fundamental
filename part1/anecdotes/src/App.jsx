@@ -30,6 +30,7 @@ const App = () => {
     setVotes(newVotes)
   }
 
+
   return (
     <>
       <div>
