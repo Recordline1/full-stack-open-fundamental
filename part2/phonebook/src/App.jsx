@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -7,26 +10,26 @@ const App = () => {
     { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ])
-  const [newName, setNewName] = useState('')
+  const [name, setName] = useState('')
   const [number, setNumber] = useState('')
   const [filter, setFilter] = useState('')
 
   const addPerson = (e) => {
     e.preventDefault()
     const newPerson = {
-      id: Date.now(),
-      name: newName,
+      id: name,
+      name: name,
       number: number
     }
     const personExists = persons.some(person => person.name === newPerson.name)
 
     if (personExists) {
       alert(`${newPerson.name} is already added to phonebook`)
-      setNewName('')
+      setName('')
       return
     }
     setPersons(prevPersons => prevPersons.concat(newPerson))
-    setNewName('')
+    setName('')
     setNumber('')
   }
 
@@ -36,43 +39,24 @@ const App = () => {
 
   return (
     <div>
+
       <h2>Phonebook</h2>
-      <div>filter showen with:
-         <input
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          />
-         </div>
-      <form onSubmit={addPerson}>
-        <h3>Add a new number</h3>
-        <div>
-          name:
-          <input
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-          />
-        </div>
-        <div>
-          number:
-          <input
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
-          />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      {filteredPersons.length > 0 ? (
-        <ul>
-          {filteredPersons.map(person => (
-            <li key={person.id}>name: {person.name} <br/> number: {person.number}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No persons in phonebook</p>
-      )}
+
+      <Filter filter={filter} handleFilterChange={(e) => setFilter(e.target.value)} />
+
+      <h3>Add a new number</h3>
+
+      <PersonForm
+        name={name}
+        number={number}
+        handleNameChange={setName}
+        handleNumberChange={setNumber}
+        addPerson={addPerson}
+      />
+
+      <h3>Numbers</h3>
+
+      <Persons persons={filteredPersons} />
 
     </div>
   )
