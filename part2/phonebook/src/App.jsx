@@ -25,11 +25,25 @@ const App = () => {
       name: name,
       number: number
     }
-    const personExists = persons.some(person => person.name === newPerson.name)
+    const personExists = persons.find(person => person.name === newPerson.name)
+
 
     if (personExists) {
-      alert(`${newPerson.name} is already added to phonebook`)
-      setName('')
+      if (!window.confirm(
+        `${name} is already added to phonebook, replace the old number with a new one?`
+      )) return
+
+      phoneService
+        .update(personExists.id, { ...personExists, number })
+        .then(returnedPerson => {
+          setPersons(persons.map(p => p.id !== returnedPerson.id ? p : returnedPerson))
+          setName('')
+          setNumber('')
+        })
+        .catch(error => {
+          console.log(error)
+          alert(`Failed to update ${name}`)
+        })
       return
     }
     phoneService
@@ -58,7 +72,7 @@ const App = () => {
       .then(() => {
         setPersons(persons.filter(p => p.id !== id))
       })
-       .catch(error => {
+      .catch(error => {
         if (error.response?.status === 404) {
           alert(
             `the person '${person.name}' was already deleted from server`
@@ -66,10 +80,10 @@ const App = () => {
           setPersons(persons.filter(n => n.id !== id))
         } else {
           console.log(error)
-        alert(`Failed to delete ${person.name}`)
+          alert(`Failed to delete ${person.name}`)
         }
-     
-    })
+
+      })
   }
 
   const filteredPersons = persons.filter(person =>
