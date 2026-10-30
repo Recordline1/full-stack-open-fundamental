@@ -16,19 +16,9 @@
       "id": "3"
     },
     {
-      "name": "test",
-      "number": "321",
-      "id": "nJYvzAcHlg8"
-    },
-    {
-      "name": "tes",
-      "number": "123",
-      "id": "x8qYEej4XpY"
-    },
-    {
-      "name": "",
-      "number": "tes",
-      "id": "i3l4Ggo052A"
+      "name": "werwe",
+      "number": "werwer",
+      "id": "PzA7F-O95EM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
