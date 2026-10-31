@@ -17,7 +17,7 @@
     },
     {
       "content": "New notes",
-      "important": false,
+      "important": true,
       "id": "4IT_hFOdIyY"
     },
     {
@@ -29,6 +29,11 @@
       "content": "Second notes",
       "important": false,
       "id": "wUT444_vuGM"
+    },
+    {
+      "content": "fsdfsdf",
+      "important": false,
+      "id": "C-5MI4m4alQ"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
