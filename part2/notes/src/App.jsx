@@ -51,8 +51,6 @@ function App() {
   const notesToshowe = showAll ? notes : notes.filter(note => note.important === true)
 
 
-
-
   return (
     <>
       <h1>Notes</h1>
